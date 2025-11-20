@@ -50,38 +50,6 @@ allPosts.sort((a, b) => {
   const dateB = new Date(b.data.date || 0);
   return dateB.getTime() - dateA.getTime();
 });
-
-// Helper function to get post slug (needed in template)
-function getPostSlugForTemplate(post) {
-  if (post.data.urlSlug) {
-    return post.data.urlSlug;
-  }
-  // Generate slug from title
-  const title = post.data.title || post.slug;
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[\s_]+/g, '-')
-    .replace(/[^a-z0-9-]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
-
-interface Props {
-  post: any;
-  urlSlug: string;
-}
-
-const { post, urlSlug } = Astro.props;
-const { Content } = await post.render();
-
-// Get all posts for sidebar
-const allPosts = await getCollection('blog');
-allPosts.sort((a, b) => {
-  const dateA = new Date(a.data.date || 0);
-  const dateB = new Date(b.data.date || 0);
-  return dateB.getTime() - dateA.getTime();
-});
 ---
 
 <Layout title={post.data.title || 'Blog Post'}>
