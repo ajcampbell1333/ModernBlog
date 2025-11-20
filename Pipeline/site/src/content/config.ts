@@ -4,7 +4,18 @@ const blog = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
+    date: z.preprocess((val) => {
+      // Convert Date objects to YYYY-MM-DD strings
+      if (val instanceof Date) {
+        return val.toISOString().split('T')[0];
+      }
+      // If it's already a string, return as-is
+      if (typeof val === 'string') {
+        return val;
+      }
+      // Fallback: convert to string
+      return String(val);
+    }, z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional()),
     tags: z.array(z.string()).optional(),
     published: z.boolean().optional().default(true),
     description: z.string().optional(),
