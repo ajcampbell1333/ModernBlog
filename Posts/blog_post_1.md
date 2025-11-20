@@ -1,6 +1,6 @@
 ---
 title: "Why I'm Starting a Blog in 2025 (Yep, Plain Old Text)"
-slug: "why-im-starting-a-blog-in-2025-yep-plain-old-text"
+urlSlug: "why-im-starting-a-blog-in-2025-yep-plain-old-text"
 date: 2025-11-20
 published: true
 tags: [blogging, tech, ai, vr]

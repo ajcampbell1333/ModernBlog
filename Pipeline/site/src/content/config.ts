@@ -4,7 +4,7 @@ const blog = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    slug: z.string().optional(), // Custom URL slug (URL-friendly version of title)
+    urlSlug: z.string().optional(), // Custom URL slug (URL-friendly version of title)
     date: z.preprocess((val) => {
       // Convert Date objects to YYYY-MM-DD strings
       if (val instanceof Date) {

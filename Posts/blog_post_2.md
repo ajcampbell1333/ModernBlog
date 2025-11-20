@@ -1,6 +1,6 @@
 ---
 title: "Good Vibes?"
-slug: "good-vibes"
+urlSlug: "good-vibes"
 date: 2025-11-20
 published: true
 tags: [coding, ai, productivity, philosophy]

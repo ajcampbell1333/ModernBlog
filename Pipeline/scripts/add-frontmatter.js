@@ -35,7 +35,7 @@ function generateFrontmatter(filePath, content) {
   
   return {
     title: title,
-    slug: slug,
+    urlSlug: slug,
     date: new Date().toISOString().split('T')[0],
     published: true
   };
