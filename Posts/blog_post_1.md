@@ -5,7 +5,7 @@ published: true
 tags: [blogging, tech, ai, vr]
 ---
 
-# Why I'm Starting a Blog in 2025 (Yes, Still Plain Old Text)
+# Why I'm Starting a Blog in 2025 (Yep, Plain Old Text)
 
 Look, I'm the guy who:
 
