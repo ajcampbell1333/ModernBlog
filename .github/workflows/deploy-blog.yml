@@ -48,8 +48,14 @@ jobs:
             # Manual trigger - process all posts
             POSTS=$(find Posts -name "*.md" -type f | tr '\n' ' ')
           else
-            # Push trigger - only changed files
-            POSTS=$(git diff --name-only HEAD~1 HEAD | grep "^Posts/.*\.md$" | tr '\n' ' ' || echo "")
+            # Push trigger - check for changed files or if this is initial commit
+            if git rev-parse --verify HEAD~1 > /dev/null 2>&1; then
+              # Not first commit - check for changed files
+              POSTS=$(git diff --name-only HEAD~1 HEAD | grep "^Posts/.*\.md$" | tr '\n' ' ' || echo "")
+            else
+              # First commit - process all posts
+              POSTS=$(find Posts -name "*.md" -type f | tr '\n' ' ')
+            fi
           fi
           
           if [ -z "$POSTS" ]; then
@@ -192,9 +198,11 @@ jobs:
       pages: write
       id-token: write
     environment:
-      name: ${{ needs.detect-changes.outputs.deployment-mode == 'production' && 'github-pages' || 'github-pages-stage' }}
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
@@ -206,7 +214,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '.'
+          path: Pipeline/build
       
       - name: Deploy to GitHub Pages
         id: deployment
@@ -215,7 +223,7 @@ jobs:
   deploy-vercel:
     needs: build-site
     runs-on: ubuntu-latest
-    if: needs.detect-changes.outputs.deployment-mode == 'production' && secrets.VERCEL_TOKEN != ''
+    if: needs.detect-changes.outputs.deployment-mode == 'production'
     continue-on-error: true
     steps:
       - name: Download build artifacts
