@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0  # Full history to detect first commit
       
       - name: Determine deployment mode
         id: mode
@@ -44,17 +44,32 @@ jobs:
       - name: Detect changed posts
         id: changes
         run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Checking for posts in Posts/ directory..."
+          ls -la Posts/ || echo "Posts directory not found"
+          
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             # Manual trigger - process all posts
-            POSTS=$(find Posts -name "*.md" -type f | tr '\n' ' ')
+            echo "Manual trigger - processing all posts"
+            POSTS=$(find Posts -name "*.md" -type f 2>/dev/null | tr '\n' ' ')
           else
-            # Push trigger - check for changed files or if this is initial commit
-            if git rev-parse --verify HEAD~1 > /dev/null 2>&1; then
-              # Not first commit - check for changed files
-              POSTS=$(git diff --name-only HEAD~1 HEAD | grep "^Posts/.*\.md$" | tr '\n' ' ' || echo "")
+            # Push trigger - check commit history
+            COMMIT_COUNT=$(git rev-list --count HEAD 2>/dev/null || echo "0")
+            echo "Commit count: $COMMIT_COUNT"
+            
+            if [ "$COMMIT_COUNT" -le "1" ]; then
+              # First commit or very few commits - process all posts
+              echo "First commit detected - processing all posts"
+              POSTS=$(find Posts -name "*.md" -type f 2>/dev/null | tr '\n' ' ')
             else
-              # First commit - process all posts
-              POSTS=$(find Posts -name "*.md" -type f | tr '\n' ' ')
+              # Check for changed files
+              echo "Checking for changed files..."
+              POSTS=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "^Posts/.*\.md$" | tr '\n' ' ' || echo "")
+              if [ -z "$POSTS" ]; then
+                # No changed posts, but process all for initial setup
+                echo "No changed posts, but processing all for initial deployment"
+                POSTS=$(find Posts -name "*.md" -type f 2>/dev/null | tr '\n' ' ')
+              fi
             fi
           fi
           
