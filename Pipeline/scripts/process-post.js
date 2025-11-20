@@ -8,6 +8,7 @@ import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import { getCanonicalUrl } from './config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,7 +35,7 @@ export function processPost(filePath) {
     // Auto-generate canonical_url if not provided
     if (!frontmatter.canonical_url) {
       const filename = filePath.split(/[/\\]/).pop().replace('.md', '');
-      frontmatter.canonical_url = `https://YOUR_PORTFOLIO_URL/blog/${filename}`;
+      frontmatter.canonical_url = getCanonicalUrl(filename);
     }
     
     // Auto-generate date if not provided

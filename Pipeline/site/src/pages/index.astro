@@ -10,28 +10,202 @@ posts.sort((a, b) => {
   const dateB = new Date(b.data.date || 0);
   return dateB.getTime() - dateA.getTime();
 });
+
+// Latest post is the first one
+const latestPost = posts[0];
+const previousPosts = posts.slice(1);
+
+// Render the latest post content
+let LatestPostContent = null;
+if (latestPost) {
+  const rendered = await latestPost.render();
+  LatestPostContent = rendered.Content;
+}
 ---
 
-<Layout title="ModernBlog">
-  <main>
-    <h1>ModernBlog</h1>
-    <p>A modern, automated blog publishing pipeline.</p>
-    
-    <section>
-      <h2>Recent Posts</h2>
-      <ul>
-        {posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}`}>
-              {post.data.title || post.slug}
-            </a>
-            {post.data.date && (
-              <span> - {new Date(post.data.date).toLocaleDateString()}</span>
+<Layout title={latestPost ? latestPost.data.title : "Blog"}>
+  <div class="blog-layout">
+    <main class="main-content">
+      {latestPost ? (
+        <article class="latest-post">
+          <header>
+            <h1>{latestPost.data.title}</h1>
+            {latestPost.data.date && (
+              <time datetime={latestPost.data.date}>
+                {new Date(latestPost.data.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
             )}
-          </li>
-        ))}
-      </ul>
-    </section>
-  </main>
+            {latestPost.data.tags && latestPost.data.tags.length > 0 && (
+              <div class="tags">
+                {latestPost.data.tags.map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </header>
+          <div class="post-content">
+            {LatestPostContent && <LatestPostContent />}
+          </div>
+        </article>
+      ) : (
+        <p>No posts yet. Check back soon!</p>
+      )}
+    </main>
+    
+    <aside class="sidebar">
+      <h2>Previous Posts</h2>
+      {previousPosts.length > 0 ? (
+        <ul class="post-list">
+          {previousPosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.slug}`}>
+                {post.data.title || post.slug}
+              </a>
+              {post.data.date && (
+                <span class="post-date">
+                  {new Date(post.data.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No previous posts yet.</p>
+      )}
+    </aside>
+  </div>
 </Layout>
 
+<style>
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .blog-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .main-content {
+    min-width: 0; /* Prevents grid overflow */
+  }
+  
+  .latest-post {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .latest-post header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .latest-post h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+  }
+  
+  .latest-post time {
+    color: #666;
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  
+  .tag {
+    background: #f0f0f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85em;
+    color: #555;
+  }
+  
+  .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  .sidebar {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .post-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .post-list a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .post-list a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+  
+  .post-date {
+    display: block;
+    color: #666;
+    font-size: 0.85em;
+  }
+</style>

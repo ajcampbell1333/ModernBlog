@@ -156,6 +156,14 @@ jobs:
           cp Posts/*.md Pipeline/site/src/content/blog/ || true
           cp -r Images/* Pipeline/site/public/Images/ || true
           
+          # Generate CNAME file from config
+          cd Pipeline/scripts
+          npm install
+          BLOG_DOMAIN="${{ secrets.BLOG_DOMAIN || 'blog.YOUR_DOMAIN.com' }}" \
+          GITHUB_USERNAME="${{ secrets.GITHUB_USERNAME || 'YOUR_GITHUB_USERNAME' }}" \
+          node generate-cname.js ../../site/public/CNAME
+          cd ../..
+          
           # Fix image paths in markdown files (../Images/ -> /Images/)
           find Pipeline/site/src/content/blog -name "*.md" -exec sed -i 's|../Images/|/Images/|g' {} \;
       
