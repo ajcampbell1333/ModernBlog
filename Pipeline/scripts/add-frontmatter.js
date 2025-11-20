@@ -8,6 +8,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
+import { titleToSlug } from './generate-slug.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,9 +31,11 @@ function extractTitle(content) {
 function generateFrontmatter(filePath, content) {
   const filename = basename(filePath, '.md');
   const title = extractTitle(content) || filename.replace(/_/g, ' ').replace(/-/g, ' ');
+  const slug = titleToSlug(title);
   
   return {
     title: title,
+    slug: slug,
     date: new Date().toISOString().split('T')[0],
     published: true
   };

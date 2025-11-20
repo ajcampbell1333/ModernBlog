@@ -5,6 +5,25 @@ import { getCollection } from 'astro:content';
 // Get base URL for links (handles GitHub Pages subdirectory)
 const baseUrl = import.meta.env.BASE_URL;
 
+/**
+ * Get the URL slug for a post
+ * Uses custom slug from frontmatter if provided, otherwise generates from title
+ */
+function getPostSlug(post) {
+  if (post.data.slug) {
+    return post.data.slug;
+  }
+  // Generate slug from title
+  const title = post.data.title || post.slug;
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 // Get all blog posts
 const posts = await getCollection('blog');
 // Sort by date (newest first)
@@ -65,7 +84,7 @@ if (latestPost) {
         <ul class="post-list">
           {allPosts.map((post) => (
             <li>
-              <a href={`${baseUrl}blog/${post.slug}/`}>
+              <a href={`${baseUrl}blog/${getPostSlug(post)}/`}>
                 {post.data.title || post.slug}
               </a>
               {post.data.date && (

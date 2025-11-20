@@ -2,58 +2,250 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
+// Get base URL for links (handles GitHub Pages subdirectory)
+const baseUrl = import.meta.env.BASE_URL;
+
+/**
+ * Get the URL slug for a post
+ * Uses custom slug from frontmatter if provided, otherwise generates from title
+ */
+function getPostSlug(post) {
+  if (post.data.slug) {
+    return post.data.slug;
+  }
+  // Generate slug from title
+  const title = post.data.title || post.slug;
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  return posts.map((post) => {
+    const urlSlug = getPostSlug(post);
+    return {
+      params: { slug: urlSlug },
+      props: { post, urlSlug },
+    };
+  });
 }
 
 interface Props {
   post: any;
+  urlSlug: string;
 }
 
-const { post } = Astro.props;
+const { post, urlSlug } = Astro.props;
 const { Content } = await post.render();
+
+// Get all posts for sidebar
+const allPosts = await getCollection('blog');
+allPosts.sort((a, b) => {
+  const dateA = new Date(a.data.date || 0);
+  const dateB = new Date(b.data.date || 0);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// Helper function to get post slug (needed in template)
+function getPostSlug(post) {
+  if (post.data.slug) {
+    return post.data.slug;
+  }
+  // Generate slug from title
+  const title = post.data.title || post.slug;
+  return title
+    .toLowerCase()
+    .trim()
+    .replace(/[\s_]+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
 ---
 
 <Layout title={post.data.title || 'Blog Post'}>
-  <article>
-    <header>
-      <h1>{post.data.title || post.slug}</h1>
-      {post.data.date && (
-        <time datetime={post.data.date}>
-          {new Date(post.data.date).toLocaleDateString()}
-        </time>
-      )}
-      {post.data.tags && post.data.tags.length > 0 && (
-        <div>
-          {post.data.tags.map((tag: string) => (
-            <span>{tag}</span>
-          ))}
+  <div class="blog-layout">
+    <main class="main-content">
+      <article class="post-article">
+        <header>
+          <h1>{post.data.title || post.slug}</h1>
+          {post.data.date && (
+            <time datetime={post.data.date}>
+              {new Date(post.data.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          )}
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="tags">
+              {post.data.tags.map((tag: string) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </header>
+        <div class="post-content">
+          <Content />
         </div>
+      </article>
+    </main>
+    
+    <aside class="sidebar">
+      <h2>All Posts</h2>
+      {allPosts.length > 0 ? (
+        <ul class="post-list">
+          {allPosts.map((p) => (
+            <li>
+              <a href={`${baseUrl}blog/${getPostSlug(p)}/`} class={getPostSlug(p) === urlSlug ? 'current' : ''}>
+                {p.data.title || p.slug}
+              </a>
+              {p.data.date && (
+                <span class="post-date">
+                  {new Date(p.data.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No posts yet.</p>
       )}
-    </header>
-    <Content />
-  </article>
+    </aside>
+  </div>
 </Layout>
 
 <style>
-  article {
-    max-width: 800px;
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    max-width: 2400px;
     margin: 0 auto;
+    padding: 2rem;
   }
   
-  header {
-    margin-bottom: 2rem;
+  @media (max-width: 768px) {
+    .blog-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .main-content {
+    min-width: 0; /* Prevents grid overflow */
+  }
+  
+  /* Hide the first h1 in post content (duplicate of header title) */
+  .post-content :global(h1:first-of-type) {
+    display: none;
+  }
+  
+  .post-article {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .post-article header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .post-article h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+  }
+  
+  .post-article time {
+    color: #666;
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  
+  .tag {
+    background: #f0f0f0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.85em;
+    color: #555;
+  }
+  
+  .sidebar {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+  }
+  
+  .sidebar h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+  }
+  
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .post-list li {
+    margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid #e0e0e0;
   }
   
-  time {
+  .post-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  
+  .post-list a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .post-list a:hover {
+    color: #0066cc;
+    text-decoration: underline;
+  }
+  
+  .post-list a.current {
+    color: #0066cc;
+    font-weight: 600;
+  }
+  
+  .post-date {
+    display: block;
     color: #666;
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
   
   :global(img) {
