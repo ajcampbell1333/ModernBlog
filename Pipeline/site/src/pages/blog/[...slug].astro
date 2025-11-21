@@ -25,9 +25,25 @@ function getPostSlug(post) {
 }
 
 export async function getStaticPaths() {
+  // Define function inside getStaticPaths to ensure it's in scope
+  function getPostSlugForPaths(post) {
+    if (post.data.urlSlug) {
+      return post.data.urlSlug;
+    }
+    // Generate slug from title
+    const title = post.data.title || post.slug;
+    return title
+      .toLowerCase()
+      .trim()
+      .replace(/[\s_]+/g, '-')
+      .replace(/[^a-z0-9-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
+  
   const posts = await getCollection('blog');
   return posts.map((post) => {
-    const urlSlug = getPostSlug(post);
+    const urlSlug = getPostSlugForPaths(post);
     return {
       params: { slug: urlSlug },
       props: { post, urlSlug },
