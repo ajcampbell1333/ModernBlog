@@ -49,6 +49,7 @@ And as I work on the PCB design for an AWESOME new open-source project (yes I'm 
 - That also means 2-layer boards with LOTS of traces needs LOTS of vias. I hate it, but it keeps the cost down.
 - BUT... if you add 200 vias, you eat the whole savings. So keep it buttoned up if you can, and be aware if you max out your via budget, you should probably re-design with a 3rd layer.
 - If your thing has a chance of mass production, consider multi-layer from the top.
+- If your thing has RF (WiFi, Bluetooth, 433MHz, etc.) consider a hybrid approach (2-layer prototype for low-cost and then remap all traces that cut into the ground plane on a 3rd layer AKA best-of-both-worlds on cost versus redesign woes)
 
 I had Grok chart us some averages (100 × 100 mm board, standard 1.6 mm FR4, 2025 pricing from JLCPCB/PCBWAY/etc.):
 
