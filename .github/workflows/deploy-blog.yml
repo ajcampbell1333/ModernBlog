@@ -226,13 +226,15 @@ jobs:
           npm install
       
       - name: Build Astro site
+        env:
+          ASTRO_BASE_PATH: "/ModernBlog/"
         run: |
           cd Pipeline/site
           # Set base path: Always use /ModernBlog/ for GitHub Pages
           # Custom domain (/) will be handled by Vercel deployment or after domain verification
           # For now, GitHub Pages always needs /ModernBlog/ base path
-          export ASTRO_BASE_PATH="/ModernBlog/"
-          echo "Using GitHub Pages, base path: /ModernBlog/"
+          echo "Using GitHub Pages, base path: $ASTRO_BASE_PATH"
+          echo "Verifying ASTRO_BASE_PATH is set: $ASTRO_BASE_PATH"
           npm run build
           # Check where build output went
           if [ -d "../build" ]; then
