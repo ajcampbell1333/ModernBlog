@@ -1,7 +1,6 @@
 /**
  * Remark plugin to fix image paths in Markdown
- * Ensures image src attributes use the correct base path
- * Handles both /ModernBlog/Images/ and /Images/ paths
+ * Converts relative paths (Images/...) to base-relative paths
  */
 export function remarkFixImagePaths() {
   return (tree) => {
@@ -11,13 +10,12 @@ export function remarkFixImagePaths() {
     
     function visit(node) {
       if (node.type === 'html' && node.value) {
-        // Fix img src attributes - be very precise with the regex
-        // Match: src="/Images/filename.jpg" or src="/ModernBlog/Images/filename.jpg"
-        // Replace with: src="/ModernBlog/Images/filename.jpg"
+        // Fix relative image paths: src="Images/..." -> src="/ModernBlog/Images/..."
+        // Match paths that start with "Images/" (no leading slash, no base prefix)
         node.value = node.value.replace(
-          /src=(["'])(\/ModernBlog\/Images\/|\/Images\/)([^"']+)\1/g,
-          (match, quote, pathPrefix, imagePath) => {
-            // Always use the base path from env, ensuring no double-prefixing
+          /src=(["'])Images\/([^"']+)\1/g,
+          (match, quote, imagePath) => {
+            // Add base path prefix
             return `src=${quote}${normalizedBase}Images/${imagePath}${quote}`;
           }
         );

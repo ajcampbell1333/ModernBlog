@@ -216,9 +216,9 @@ jobs:
             IMAGE_BASE_PATH="/ModernBlog/"
             echo "Using GitHub Pages, image base: /ModernBlog/"
           fi
-          echo "Converting relative image paths (../Images/ -> /Images/)..."
-          # Convert relative paths to absolute paths (will be fixed in HTML after build)
-          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|/Images/|g" {} \;
+          echo "Converting relative image paths (../Images/ -> Images/)..."
+          # Convert relative paths to base-relative paths (no leading slash, no base prefix)
+          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|Images/|g" {} \;
           echo "Image paths converted. Sample content:"
           grep -h "src=" Pipeline/site/src/content/blog/*.md | head -3 || echo "No image tags found"
       
@@ -252,10 +252,8 @@ jobs:
             echo "ERROR: Build output not found in ../build or dist/"
             exit 1
           fi
-          # Fix image paths in built HTML (add base path to /Images/ paths)
-          echo "Fixing image paths in built HTML..."
-          find ../build -name "*.html" -type f -exec sed -i "s|src=\"/Images/|src=\"${ASTRO_BASE_PATH}Images/|g" {} \;
-          echo "Image paths fixed in HTML files"
+          # NO POST-BUILD PATH FIXING - Astro handles paths correctly
+          # The issue was double-prefixing from this sed command
           # Verify images are in build output
           echo "Checking for images in build output:"
           if [ -d "../build/Images" ]; then
