@@ -19,10 +19,10 @@ And yet here I am opening a blank Markdown file like it's still a thing.
 ## 2025 is Absolutely Insane
 
 <div style="display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0;">
-  <img src="/ModernBlog/Images/bigscreen-beyond-2-orange.webp" alt="Bigscreen Beyond 2" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
-  <img src="/ModernBlog/Images/steam-frame-green.webp" alt="Steam Frame" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
-  <img src="/ModernBlog/Images/nvidia-nim.png" alt="NVIDIA NIM" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
-  <img src="/ModernBlog/Images/comfyui.jpg" alt="ComfyUI" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
+  <img src="/Images/bigscreen-beyond-2-orange.webp" alt="Bigscreen Beyond 2" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
+  <img src="/Images/steam-frame-green.webp" alt="Steam Frame" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
+  <img src="/Images/nvidia-nim.png" alt="NVIDIA NIM" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
+  <img src="/Images/comfyui.jpg" alt="ComfyUI" style="max-width: 100%; height: auto; flex: 1; min-width: 150px;" />
 </div>
 
 2025 is absolutely insane, in the best way.

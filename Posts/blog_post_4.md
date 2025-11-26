@@ -11,7 +11,7 @@ I'm in more of a nuts-and-bolts mood today. Check your nerd card at the door. Th
 After building over a dozen PCB circuit board ideas from concept to completion, I consider myself an expert on the subject.  
 
 <div style="display: flex; gap: 1rem; align-items: stretch; margin: 1rem 0;">
-  <img src="/ModernBlog/Images/dude-confused.gif" alt="Incredulous meme" style="max-width: 200px; height: auto; flex-shrink: 0;" />
+  <img src="/Images/dude-confused.gif" alt="Incredulous meme" style="max-width: 200px; height: auto; flex-shrink: 0;" />
   <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-end;">
     <p style="margin: 0;">But really though...</p>
   </div>
@@ -24,7 +24,7 @@ If you've ever ordered a fresh PCB, you know what I mean. It's not a good smell,
 ...And then you fry it the moment you plug it in. Mmmm, Electric Fire Christmas Smell.  
 
 <div style="display: flex; gap: 1rem; align-items: stretch; margin: 1rem 0;">
-  <img src="/ModernBlog/Images/shrug-meme.jpg" alt="Shrug meme" style="max-width: 200px; height: auto; flex-shrink: 0;" />
+  <img src="/Images/shrug-meme.jpg" alt="Shrug meme" style="max-width: 200px; height: auto; flex-shrink: 0;" />
   <div style="flex: 1; display: flex; flex-direction: column; justify-content: flex-end;">
     <p style="margin: 0;">You moved too fast. You inverted two traces or you should have added polarity inversion or...</p><br>
     <p style="margin: 0;">[INSERT OTHER NOOB PROTECTION HERE].</p>
@@ -39,7 +39,7 @@ And as I work on the PCB design for an AWESOME new open-source project (yes I'm 
 
 ### Big PCB Design Insights From A Novice Firmware Guy/Actual Expert VR Guy:
 
-<img src="/ModernBlog/Images/thinking-hard-meme.jpg" alt="Thinking meme" style="max-width: 100%; height: auto;" />
+<img src="/Images/thinking-hard-meme.jpg" alt="Thinking meme" style="max-width: 100%; height: auto;" />
 
 - Prototypes are dirt-cheap because manufacturers like JLC and PCBWay take a loss on them to seed brand awareness and train new firmware engineers on their workflow.
 - Small batch (100s or low 1000s) leaps in price from prototype (dozens).

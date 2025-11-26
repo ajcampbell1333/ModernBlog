@@ -8,7 +8,7 @@ tags: [coding, ai, productivity, philosophy]
 
 # Good Vibes?
 
-<img src="/ModernBlog/Images/Iron_Legion.webp" alt="Iron Legion" width="100%" />
+<img src="/Images/Iron_Legion.webp" alt="Iron Legion" width="100%" />
 
 **Down with pure "vibe coding."**
 And I'm not just saying that as an over-the-hill grey-whiskered dude-bro who's been driving stick in IDEs for 25 years. I'm very open to driving automatic for a commute. I'm still gonna drive stick at the racetrack on the weekends, but companies have bottom lines and well-utilized AIs bring productivity, no doubt. 

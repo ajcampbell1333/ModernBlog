@@ -216,8 +216,9 @@ jobs:
             IMAGE_BASE_PATH="/ModernBlog/"
             echo "Using GitHub Pages, image base: /ModernBlog/"
           fi
-          echo "Fixing image paths in markdown files (../Images/ -> ${IMAGE_BASE_PATH}Images/)..."
-          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|${IMAGE_BASE_PATH}Images/|g" {} \;
+          echo "Fixing image paths in markdown files (../Images/ -> /Images/)..."
+          # Use /Images/ and let Astro's base path handle the prefixing
+          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|/Images/|g" {} \;
           echo "Image paths fixed. Sample content:"
           grep -h "src=" Pipeline/site/src/content/blog/*.md | head -3 || echo "No image tags found"
       
@@ -335,6 +336,14 @@ jobs:
             echo "WARNING: index.html not found in pages-build!"
           else
             echo "✓ index.html found"
+          fi
+          # Verify images are in pages build
+          if [ -d "./pages-build/Images" ]; then
+            echo "✓ Images directory found in pages-build"
+            ls -la ./pages-build/Images/ | head -10
+          else
+            echo "WARNING: Images directory not found in pages-build!"
+            echo "This may cause broken image links on the live site."
           fi
       
       - name: Setup Pages
