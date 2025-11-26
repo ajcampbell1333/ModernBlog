@@ -48,6 +48,16 @@ ModernBlog/
 
 ## Key Rules for Agents
 
+### 0. Image Path Handling - CRITICAL
+**NEVER manually add base path prefixes to image src attributes in source files.**
+
+- ✅ **ALWAYS use:** `src="Images/filename.jpg"` (relative path, no prefix)
+- ❌ **NEVER use:** `src="/ModernBlog/Images/..."` or `src="/Images/..."`
+- The `remark-fix-image-paths.js` plugin automatically adds the base path during build
+- See `Pipeline/Research/image-path-handling.md` for full documentation
+- **If local preview shows broken images:** Fix the image copy step, NOT the source paths
+- If images break, check that source files use `Images/...` format and the remark plugin is enabled
+
 ### 1. Never Commit Personal Information
 - ❌ API keys, tokens, passwords
 - ❌ Personal URLs, domains
