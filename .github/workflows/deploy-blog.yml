@@ -216,10 +216,10 @@ jobs:
             IMAGE_BASE_PATH="/ModernBlog/"
             echo "Using GitHub Pages, image base: /ModernBlog/"
           fi
-          echo "Fixing image paths in markdown files (../Images/ -> ${IMAGE_BASE_PATH}Images/)..."
-          # Replace ../Images/ with base path (Astro doesn't auto-prefix absolute paths in raw HTML)
-          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|${IMAGE_BASE_PATH}Images/|g" {} \;
-          echo "Image paths fixed. Sample content:"
+          echo "Converting relative image paths (../Images/ -> /Images/)..."
+          # Convert relative paths to absolute paths (remark plugin will add base path)
+          find Pipeline/site/src/content/blog -name "*.md" -exec sed -i "s|../Images/|/Images/|g" {} \;
+          echo "Image paths converted. Sample content:"
           grep -h "src=" Pipeline/site/src/content/blog/*.md | head -3 || echo "No image tags found"
       
       - name: Install Astro dependencies
