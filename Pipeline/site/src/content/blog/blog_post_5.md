@@ -18,7 +18,7 @@ Think of these bots as the ultimate NPCs with haptics. They’re not replacing t
 
 <div style="display: flex; gap: 1rem; align-items: center; margin: 1rem 0;">
   <div style="flex: 1;">
-    <p style="margin: 0;">At the local high-end mall in 2032, you'll follow a fully-animatronic Dorothy Gale who grabs your hand with soft-haptic-capable gloves and literally pulls you down an AR-enhanced yellow brick road that only you can see through your lightweight glasses. You see her through passthrough VR sunglasses, which you own since that's what Apple Vision Pro has become. No human could do eight straight hours of skipping and hand-in-hand with strangers and come back and do it again daily for less than $50 daily on the company's dime. That's why that category of job can't exist. YET.</p>
+    <p style="margin: 0;">At the local high-end mall in 2032, you'll follow a fully-animatronic Dorothy Gale who grabs your hand with soft-haptic-capable gloves and literally pulls you down an AR-enhanced yellow brick road. You see her through passthrough VR sunglasses, which you own since that's what Apple Vision Pro has become. No human could do eight straight hours of skipping and hand-in-hand with strangers and come back and do it again daily for less than $50 daily on the company's dime. That's why that category of job can't exist. YET.</p>
   </div>
   <img src="Images/wizard-of-oz.jpg" alt="Wizard of Oz scene" style="max-width: 300px; width: auto; height: auto; object-fit: contain; flex-shrink: 0;" />
 </div>
