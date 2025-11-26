@@ -33,7 +33,7 @@ If you've ever ordered a fresh PCB, you know what I mean. It's not a good smell,
 
 Though I'm no expert on hardware, I can safely say I carry a novice badge after half a decade of full-time tinkering. I know my pull-ups and my pull-downs. I'm a big kid now.
 
-And as I work on the PCB design for an AWESOME new open-source project (yes I'm about to shill, but it's okay bc it's FREE!) called [LBEAST](https://github.com/YOUR_GITHUB_USERNAME/LBEAST#readme), a VR Arcade SDK that lets you deploy theme-park-level attractions rapidly...
+And as I work on the PCB design for an AWESOME new open-source project (yes I'm about to shill, but it's okay bc it's FREE!) called [LBEAST](https://github.com/ajcampbell1333/LBEAST_Unreal#readme), a VR Arcade SDK that lets you deploy theme-park-level attractions rapidly...
 
 ...I have new insights about PCB design that are probably a big DUH to you veteran firmware engineers. But these insights are impactful for me on my novice-to-intermediate journey. Anyone who might find this helpful... here they are.
 

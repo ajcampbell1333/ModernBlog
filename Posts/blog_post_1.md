@@ -11,7 +11,7 @@ tags: [blogging, tech, ai, vr]
 Look, I'm the guy who:
 
 - Built a VR "word volume" where you reach into a cloud of floating letters with your bare hands, grab clusters, and slam them together to make sentences—because QWERTY in mid-air is a crime against humanity.
-- Is currently hacking on [LBEAST](https://github.com/YOUR_GITHUB_USERNAME), an open-source framework to turn dead shopping malls into location-based VR theme parks with almost zero new hardware.
+- Is currently hacking on [LBEAST](https://github.com/ajcampbell1333/LBEAST_Unreal#readme), an open-source framework to turn dead shopping malls into location-based VR theme parks with almost zero new hardware.
 - Is simultaneously code-herding a dozen AI agents that are writing Unity/Unreal modules for next-gen hand tracking, hydraulics firmware, and AI facemasks for live actors as I type this sentence.
 
 And yet here I am opening a blank Markdown file like it's still a thing.
@@ -55,7 +55,7 @@ Here's the exact stack I used to make this blog live in one evening while my Unr
   - Pings my own site so the canonical URL is always mine
   - No Wordpress, Wix, Squarespace, or other pay-to-play WYSIWYG
   - And you can try it free! - Just enter your credit c...
-  - JK, it's on my [Github](https://github.com/YOUR_GITHUB_USERNAME/ModernBlog) 
+  - JK, it's on my [Github](https://github.com/ajcampbell1333/ModernBlog) 
 
 Seventy lines of YAML total. One git push → everywhere in <90 seconds. I will never manually copy-paste into another rich-text editor again.
 
