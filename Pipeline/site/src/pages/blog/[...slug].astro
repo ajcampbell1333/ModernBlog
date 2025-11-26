@@ -6,6 +6,29 @@ import Layout from '../../layouts/Layout.astro';
 const baseUrl = import.meta.env.BASE_URL;
 
 /**
+ * Get the current signature (only one should be marked current: true)
+ * Throws an error if multiple signatures are marked as current
+ */
+async function getCurrentSignature() {
+  const allSignatures = await getCollection('signatures');
+  const currentSignatures = allSignatures.filter(sig => sig.data.current === true);
+  
+  if (currentSignatures.length === 0) {
+    return null; // No current signature set
+  }
+  
+  if (currentSignatures.length > 1) {
+    const signatureNames = currentSignatures.map(sig => sig.slug).join(', ');
+    throw new Error(
+      `Multiple signatures are marked as current: ${signatureNames}. ` +
+      `Only one signature should have current: true.`
+    );
+  }
+  
+  return currentSignatures[0];
+}
+
+/**
  * Get the URL slug for a post
  * Uses custom urlSlug from frontmatter if provided, otherwise generates from title
  */
@@ -59,6 +82,22 @@ interface Props {
 const { post, urlSlug } = Astro.props;
 const { Content } = await post.render();
 
+// Get current signature
+let currentSignature = null;
+let SignatureContent = null;
+try {
+  currentSignature = await getCurrentSignature();
+  if (currentSignature) {
+    const { Content: SigContent } = await currentSignature.render();
+    SignatureContent = SigContent;
+  } else {
+    console.log('No current signature found');
+  }
+} catch (error) {
+  console.error('Error loading signature:', error);
+  // Continue without signature if there's an error
+}
+
 // Get all posts for sidebar
 const allPosts = await getCollection('blog');
 allPosts.sort((a, b) => {
@@ -93,6 +132,11 @@ allPosts.sort((a, b) => {
         </header>
         <div class="post-content">
           <Content />
+          {SignatureContent && (
+            <div class="signature">
+              <SignatureContent />
+            </div>
+          )}
         </div>
       </article>
     </main>
@@ -266,6 +310,14 @@ allPosts.sort((a, b) => {
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-size: 0.9em;
+  }
+  
+  .signature {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    color: #666;
+    font-style: italic;
   }
 </style>
 

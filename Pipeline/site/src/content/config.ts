@@ -24,5 +24,12 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const signatures = defineCollection({
+  type: 'content',
+  schema: z.object({
+    current: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, signatures };
 
