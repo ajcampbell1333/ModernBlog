@@ -41,9 +41,8 @@ None of these jobs existed yesterday because the ROI didn’t pencil out for hum
 
 **I've got immersive theater on the brain as you can tell.**
 
-I'm trying to build exactly what I'm describing in game engine right now. Obviously, we don't have humanoid robots capable of driving it yet, but I think early immersive theater will have live actors wearing AI-rendered masks, like a Halloween mask that can talk. I'm prototyping it in [LBEAST](https://github.com/ajcampbell1333/LBEAST_Unreal#readme) right now (my current open-source Unity/Unreal plugin project).
+I'm trying to build exactly what I'm describing in game engine right now. Obviously, we don't have humanoid robots capable of driving it yet, but I think early immersive theater will have live actors wearing AI-rendered masks, like a Halloween mask that can talk. I'm prototyping it in [LBEAST](https://github.com/ajcampbell1333/LBEAST_Unreal#readme) right now (my current open-source Unity/Unreal plugin project). The repo is free, battle-tested in real arcades and trade-show floors, and ready for the first developer who wants to script Dorothy’s wrist torque when she tugs a 6-year-old toward Oz.
 
-were built exactly for this future: stand up a 12-station VR experience in a morning, sync it to physical props and robots in an afternoon, and hand it off to ops techs who barely code but can keep the show running flawlessly. The repo is free, battle-tested in real arcades and trade-show floors, and ready for the first developer who wants to script Dorothy’s wrist torque when she tugs a 6-year-old toward Oz.
 Bottom line: the humanoid wave isn’t coming to delete your job. In immersive entertainment, it’s coming to fund jobs that were always too magical to be profitable—until now.
 
 
