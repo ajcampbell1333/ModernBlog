@@ -64,8 +64,11 @@ export async function getStaticPaths() {
       .replace(/^-+|-+$/g, '');
   }
   
-  const posts = await getCollection('blog');
-  return posts.map((post) => {
+  // Only get published posts
+  const allPosts = await getCollection('blog');
+  const publishedPosts = allPosts.filter(post => post.data.published !== false);
+  
+  return publishedPosts.map((post) => {
     const urlSlug = getPostSlugForPaths(post);
     return {
       params: { slug: urlSlug },
@@ -98,13 +101,15 @@ try {
   // Continue without signature if there's an error
 }
 
-// Get all posts for sidebar
-const allPosts = await getCollection('blog');
-allPosts.sort((a, b) => {
-  const dateA = new Date(a.data.date || 0);
-  const dateB = new Date(b.data.date || 0);
-  return dateB.getTime() - dateA.getTime();
-});
+// Get all published posts for sidebar
+const allPostsCollection = await getCollection('blog');
+const allPosts = allPostsCollection
+  .filter(post => post.data.published !== false)
+  .sort((a, b) => {
+    const dateA = new Date(a.data.date || 0);
+    const dateB = new Date(b.data.date || 0);
+    return dateB.getTime() - dateA.getTime();
+  });
 ---
 
 <Layout title={post.data.title || 'Blog Post'}>
