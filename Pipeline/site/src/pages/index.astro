@@ -125,6 +125,9 @@ try {
     </main>
     
     <aside class="sidebar">
+      <div class="portfolio-link">
+        <a href="https://ajcampbell.info">← Back to AJ's Portfolio</a>
+      </div>
       <h2>All Posts</h2>
       {allPosts.length > 0 ? (
         <ul class="post-list">
@@ -236,6 +239,25 @@ try {
     height: fit-content;
     position: sticky;
     top: 2rem;
+  }
+  
+  .portfolio-link {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .portfolio-link a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.95em;
+    font-weight: 500;
+    display: inline-block;
+  }
+  
+  .portfolio-link a:hover {
+    text-decoration: underline;
+    color: #0052a3;
   }
   
   .sidebar h2 {
