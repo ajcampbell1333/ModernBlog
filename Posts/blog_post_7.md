@@ -69,7 +69,7 @@ The same 2° twitch moves it 6 feet (a ~25X precision loss) when the object is 5
 
 Try moving something a few inches when it's 50 m out. You literally can't.
 
-HCI researchers have documented this failure for years. A 2023 meta-analysis by Boletsis & Kongsvold (Frontiers in Virtual Reality) reviewed 47 far-field pointing studies and found error rates and selection times explode beyond 3–5 meters. Users abandon raycasting and physically walk closer whenever the system allows it.
+HCI researchers have documented this failure for years. Multiple studies have shown that error rates and selection times increase significantly beyond 3–5 meters. Users abandon raycasting and physically walk closer whenever the system allows it.
 
 We keep adding curve beams, progressive refinement, heuristic snapping, and "smart" cursors because raycasting is the devil we know.
 
