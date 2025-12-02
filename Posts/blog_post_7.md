@@ -72,7 +72,7 @@ Try moving something a few inches when it's 50 m out. You literally can't.
 HCI researchers have documented this failure for years:
 
 <div style="display: flex; gap: 1rem; align-items: flex-start; margin: 1rem 0;">
-  <div style="flex: 1;">
+  <div style="flex: 1.5;">
     <p style="margin: 0;">A 2019 study by Baloup, Pietrzak, and Casiez (CHI 2019) on raycasting techniques found that selecting small and distant targets leads to increased error rates, with researchers proposing filtering and cursor enhancements specifically to address precision degradation at distance. Users abandon raycasting and physically walk closer whenever the system allows it.</p>
   </div>
   <div style="flex: 1;">
