@@ -117,7 +117,7 @@ So if your gaze is mostly on the far field, and the vooddo doll widgets are most
 
 Eye tracking is the jelly to triple-proxy God-mode's peanut butter. I don't know the perfect implementation of it. I can picture 100 prototypes that hack at this concept from 100 different angles.
 
-I published a very green pre-alpha Unity project called [Atomic](https://github.com/scifiuiguy/atomic) back in 2020 which revealed the full nature of this challenge to me. It was a project originally meant as a nameless node-based visual programming language, but it never got far because node cloud in XR are impossible to use without triple-proxy capabilities, and I sorely lacked awareness of this at the time of the project's creation.
+I published a very green pre-alpha Unity project called [Atomic](https://github.com/scifiuiguy/atomic) back in 2020 which revealed the full nature of this challenge to me. It was a project originally meant as a nameless node-based visual programming language, but it never got far because node clouds in XR are impossible to use without triple-proxy capabilities, and I sorely lacked awareness of this at the time of the project's creation.
 
 That's why it turned from a VPL prototype into a triple-proxy XR transform gizmo prototype pretty quickly. It has gizmo widgets (akin to voodoo dolling) that I think are a pretty good first crack at triple-proxy capability, but it's a devastatingly basic attempt, and I haven't had time to touch it for years. And I had no access to eye tracking hardware back then.
 
