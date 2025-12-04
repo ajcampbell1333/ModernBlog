@@ -115,8 +115,12 @@ So if your gaze is mostly on the far field, and the vooddo doll widgets are most
 
 **Eye tracking.**
 
-Eye tracking is the jelly to triple-proxy God-mode's peanut butter. I don't know the perfect implementation of it, because I can picture 100 prototypes that hack at this concept from 100 different angles. I published a very green pre-alpha Unity project called [Atomic](https://github.com/scifiuiguy/atomic) back in 2020 which revealed the full nature of this challenge to me. It has transform gizmo widgets that I think are a pretty good first crack at triple-proxy capability, but it's a devastatingly basic attempt, and I haven't had time to touch it it years. And I had no access to eye tracking hardware back then.
+Eye tracking is the jelly to triple-proxy God-mode's peanut butter. I don't know the perfect implementation of it. I can picture 100 prototypes that hack at this concept from 100 different angles.
+
+I published a very green pre-alpha Unity project called [Atomic](https://github.com/scifiuiguy/atomic) back in 2020 which revealed the full nature of this challenge to me. It was a project originally meant as a nameless node-based visual programming language, but it never got far because node cloud in XR are impossible to use without triple-proxy capabilities, and I sorely lacked awareness of this at the time of the project's creation.
+
+That's why it turned from a VPL prototype into a triple-proxy XR transform gizmo prototype pretty quickly. It has gizmo widgets (akin to voodoo dolling) that I think are a pretty good first crack at triple-proxy capability, but it's a devastatingly basic attempt, and I haven't had time to touch it for years. And I had no access to eye tracking hardware back then.
 
 Neither triple-proxy nor eye tracking can stand alone in XR. United, they're strong. This is UX fruit that has been low-hanging ever since eye tracking HMDs started launching. I've zero time to prototype in this direction, but I SO desperately want to unshelve Atomic when there's a free moment of not hawking my wares as a contract XR dev.
 
-So that begs the final question: which of you XR devs are going to beat me to this low-hanging fruit?
+So that begs the final question: which of you XR devs is going to beat me to this low-hanging fruit?
