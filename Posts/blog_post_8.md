@@ -6,7 +6,7 @@ published: true
 tags: [vr, tech, hci, philosophy, xr]
 ---
 
-![Vision Pro UX interface](Images/vision-pro-ux.webp)
+<img src="Images/vision-pro-ux.webp" alt="Vision Pro UX interface" />
 
 Thirteen years ago, the Oculus Kickstarter launched modern VR. Eye tracking was a dreamy footnote. 
 
@@ -29,7 +29,7 @@ Let's not get ahead of ourselves though.
 
 Research is abuzz with papers (often commissioned by HMD OEMs) claiming eye tracking is the killer interaction model for spatial computing, but recent work like Liu et al.'s ["Enhancing Smartphone Eye Tracking with Cursor-Based Interactive Implicit Calibration"](https://wangchongyang.ai/assets/pdf/EnhanceGaze_CHI25.pdf) (CHI 2025) shows yet again that even with significant improvements, gaze-based control still requires calibration and doesn't match the precision of traditional input methods like mouse cursors. 
 
-![Eye tracking calibration results from Liu et al. CHI 2025 paper](Images/eye-tracking-paper.png)
+<img src="Images/eye-tracking-paper.png" alt="Eye tracking calibration results from Liu et al. CHI 2025 paper" />
 
 Still, the XR community was excited enough to convince Apple that their fist swing at dedicated spatial computing in Vision Pro 1.0 should utilize eye tracking as a core component of its entire interface.
 
